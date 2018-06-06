@@ -27,7 +27,7 @@ public class DeadlockTest implements Runnable {
                 try {
                     Thread.sleep(500);
                 } catch (Exception e) {
-                    // TODO: handle exception
+                    e.printStackTrace();
                 }
                 lock2.lockInterruptibly();
             } else {
@@ -35,12 +35,12 @@ public class DeadlockTest implements Runnable {
                 try {
                     Thread.sleep(500);
                 } catch (Exception e) {
-                    // TODO: handle exception
+                    e.printStackTrace();
                 }
                 lock1.lockInterruptibly();
             }
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         } finally {
             if (lock1.isHeldByCurrentThread()) {
                 lock1.unlock();
@@ -60,13 +60,12 @@ public class DeadlockTest implements Runnable {
         thread1.start();
         thread2.start();
         Thread.sleep(1000);
-        DeadlockChecker.check();
+//        DeadlockChecker.check();
     }
 
     static class DeadlockChecker {
         private final static ThreadMXBean mbean = ManagementFactory.getThreadMXBean();
         final static Runnable deadlockChecker = () -> {
-            // TODO Auto-generated method stub
             while (true) {
                 long[] deadlockedThreadIds = mbean.findDeadlockedThreads();
                 if (deadlockedThreadIds != null) {
@@ -82,7 +81,7 @@ public class DeadlockTest implements Runnable {
                 try {
                     Thread.sleep(5000);
                 } catch (Exception e) {
-                    // TODO: handle exception
+                    e.printStackTrace();
                 }
             }
 
