@@ -11,6 +11,7 @@ public class ISubjectImpl implements ISubject {
     /**
      * 执行
      */
+    @Override
     public void execute() {
         LOGGER.info("ISubjectImpl execute");
     }
